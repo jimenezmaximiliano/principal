@@ -22,6 +22,7 @@ func NewLogger() FullLogger {
 	if err != nil {
 		panic(errors.Wrap(err, "failed to create a base zap logger"))
 	}
+
 	sugaredLogger := baseLogger.Sugar()
 	if sugaredLogger == nil {
 		panic(errors.Wrap(err, "failed to create a zap sugared logger"))
