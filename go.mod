@@ -3,7 +3,7 @@ module github.com/jimenezmaximiliano/principal
 go 1.19
 
 require (
-	github.com/jimenezmaximiliano/kirk v0.1.0
+	github.com/jimenezmaximiliano/kirk v0.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/pseidemann/finish v1.2.0
 	github.com/stretchr/testify v1.8.2
