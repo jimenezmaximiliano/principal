@@ -6,9 +6,9 @@ import (
 	"go.uber.org/zap"
 )
 
-// FullLogger represents the logger that will be returned by NewLogger.
+// fullLogger represents the logger that will be returned by NewLogger.
 // We are not using kirk.Logger so a breaking change in kirk, becomes an explicit error here.
-type FullLogger interface {
+type fullLogger interface {
 	Error(err error)
 	Panic(err error)
 	Debug(message string)
@@ -16,17 +16,20 @@ type FullLogger interface {
 	Warn(message string)
 }
 
-// NewLogger uses kirk to create a new zap sugared logger abstracted into a generic interface.
-func NewLogger() FullLogger {
+// Check that kirk.ZapLoggerAdapter implements fullLogger.
+var _ fullLogger = kirk.ZapLoggerAdapter{}
+
+// NewZapLogger uses kirk to create a new zap sugared logger.
+func NewZapLogger() (kirk.ZapLoggerAdapter, error) {
 	baseLogger, err := zap.NewProduction()
 	if err != nil {
-		panic(errors.Wrap(err, "failed to create a base zap logger"))
+		return kirk.ZapLoggerAdapter{}, errors.Wrap(err, "failed to create a base zap logger")
 	}
 
 	sugaredLogger := baseLogger.Sugar()
 	if sugaredLogger == nil {
-		panic(errors.Wrap(err, "failed to create a zap sugared logger"))
+		return kirk.ZapLoggerAdapter{}, errors.Wrap(err, "failed to create a zap sugared logger")
 	}
 
-	return kirk.NewLoggerFromSugaredZap(*sugaredLogger)
+	return kirk.NewLoggerFromSugaredZap(*sugaredLogger), nil
 }
