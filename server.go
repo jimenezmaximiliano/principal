@@ -2,6 +2,7 @@ package principal
 
 import (
 	"context"
+	"fmt"
 	"syscall"
 	"time"
 
@@ -19,6 +20,7 @@ type Server interface {
 type LoggerForStartServer interface {
 	Panic(err error)
 	Error(err error)
+	Info(message string)
 }
 
 // StartServer starts an HTTP server that can be shut down gracefully.
@@ -46,9 +48,9 @@ type finisherLoggerAdapter struct {
 	logger LoggerForStartServer
 }
 
-// Infof is required for finish.Finisher but we'll just ignore these kind of logs.
+// Infof is required for finish.Finisher to log informational messages.
 func (logger finisherLoggerAdapter) Infof(format string, v ...interface{}) {
-	// Ignore info messages.
+	logger.logger.Info(fmt.Sprintf(format, v...))
 }
 
 // Errorf is required for finish.Finisher to log errors.
