@@ -6,7 +6,7 @@ require (
 	github.com/jimenezmaximiliano/kirk v0.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/pseidemann/finish v1.2.0
-	github.com/stretchr/testify v1.8.3
+	github.com/stretchr/testify v1.8.4
 	go.uber.org/zap v1.24.0
 )
 
