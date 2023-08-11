@@ -2,8 +2,8 @@ github.com/benbjohnson/clock v1.3.0 h1:ip6w0uFQkncKQ979AypyG0ER7mqUSBdKLOgAle/AT
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/jimenezmaximiliano/kirk v0.2.0 h1:Y+LdobqLKLkow3Zbg58EJU3W6qnSccoWbwGqRuQBrB4=
-github.com/jimenezmaximiliano/kirk v0.2.0/go.mod h1:u0YiFiyKgsVaJoF0V90oEEB6xkIYS3x0LbhJ091C8zE=
+github.com/jimenezmaximiliano/kirk v0.3.0 h1:iXl2V/G3zwyZtDVhlhMW0ntglwZFn+6rwqZjYWqKndI=
+github.com/jimenezmaximiliano/kirk v0.3.0/go.mod h1:XWvMtsS1xGp3koh8NCJ1dKvH9Rrb85wUApw8DBWoYRU=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
 github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
