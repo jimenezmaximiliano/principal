@@ -18,13 +18,13 @@ type Server interface {
 
 // LoggerForStartServer includes the methods needed for StartServer.
 type LoggerForStartServer interface {
-	Panic(err error)
-	Error(err error)
-	Info(message string)
+	Panic(ctx context.Context, err error)
+	Error(ctx context.Context, err error)
+	Info(ctx context.Context, message string)
 }
 
 // StartServer starts an HTTP server that can be shut down gracefully.
-func StartServer(logger LoggerForStartServer, server Server, shutdownTimeout time.Duration) {
+func StartServer(ctx context.Context, logger LoggerForStartServer, server Server, shutdownTimeout time.Duration) {
 	finisher := &finish.Finisher{
 		Timeout: shutdownTimeout,
 		Log: finisherLoggerAdapter{
@@ -37,7 +37,7 @@ func StartServer(logger LoggerForStartServer, server Server, shutdownTimeout tim
 
 	go func() {
 		if err := server.ListenAndServe(); err != nil {
-			logger.Panic(err)
+			logger.Panic(ctx, err)
 		}
 	}()
 
@@ -50,10 +50,10 @@ type finisherLoggerAdapter struct {
 
 // Infof is required for finish.Finisher to log informational messages.
 func (logger finisherLoggerAdapter) Infof(format string, v ...interface{}) {
-	logger.logger.Info(fmt.Sprintf(format, v...))
+	logger.logger.Info(context.Background(), fmt.Sprintf(format, v...))
 }
 
 // Errorf is required for finish.Finisher to log errors.
 func (logger finisherLoggerAdapter) Errorf(format string, v ...interface{}) {
-	logger.logger.Error(errors.Errorf(format, v...))
+	logger.logger.Error(context.Background(), errors.Errorf(format, v...))
 }
