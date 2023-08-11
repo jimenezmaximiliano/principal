@@ -1,9 +1,11 @@
 package principal_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/pkg/errors"
+	"github.com/stretchr/testify/mock"
 
 	"github.com/jimenezmaximiliano/principal"
 	"github.com/jimenezmaximiliano/principal/mocks"
@@ -14,7 +16,7 @@ func TestItDoesNotPanicWithoutAnError(test *testing.T) {
 
 	logger := mocks.NewLoggerForPanic(test)
 
-	principal.PanicOnError(logger, nil)
+	principal.PanicOnError(context.Background(), logger, nil)
 }
 
 func TestItPanicsWithAnError(test *testing.T) {
@@ -23,7 +25,7 @@ func TestItPanicsWithAnError(test *testing.T) {
 	err := errors.New("oops")
 
 	logger := mocks.NewLoggerForPanic(test)
-	logger.On("Panic", err).Return()
+	logger.On("Panic", mock.Anything, err).Return()
 
-	principal.PanicOnError(logger, err)
+	principal.PanicOnError(context.Background(), logger, err)
 }
